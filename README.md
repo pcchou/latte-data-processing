@@ -42,6 +42,10 @@ $F_M = \text{mean}(F_L) - \text{mean}(F_S)$
 
 The flat dark is neglated due to a rather short exposure time. Since the bias is included in the short flat frames, it is not removed additionally.
 
+#### Downsampled flat
+
+Additionally, the flat frame for B, V, R is downscaled (downsampled) from 4096x4096 to 2048x2048 for use in the bin 2x2 images by local mean downscaling.
+
 ### Light
 
 Let $L_R[i]$ denote the raw light frames, $F$ denote the corresponding master flat frame, $D$ denote the corresponding master dark frame, and $L_M$ be the resulting (combined) master flat frame.
