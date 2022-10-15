@@ -17,7 +17,7 @@ master_dark = pyfits.getdata(f'../dark/master_dark_{exposure}.fit')
 
 data = []
 for filename in glob("*.fit*"):
-    data.append(pyfits.getdata(filename) - master_dark)
+    data.append(pyfits.getdata(filename).astype('int') - master_dark)
 
 master_data = np.mean(data, axis=0)
 
