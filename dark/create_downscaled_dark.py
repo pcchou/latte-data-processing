@@ -2,8 +2,6 @@
 # coding: utf-8
 import astropy.io.fits as pyfits
 from skimage import transform as skt
-import numpy as np
-from glob import glob
 
 exposures = ['5min']
 for exposure in exposures:
@@ -12,7 +10,10 @@ for exposure in exposures:
             fits = pyfits.open(f)[0]
             data = fits.data
     except FileNotFoundError:
+        print(f'Exposure {exposure} no file!')
         continue
+
+    print(f'Processing exposure {exposure}...')
 
     data_scaled = skt.downscale_local_mean(data, (2, 2))
 
@@ -20,4 +21,5 @@ for exposure in exposures:
     h.scale('uint16')
     h.header['BZERO'] = 32768
     h.header['BSCALE'] = 1
+    print(f'Saving image... master_dark_{exposure}_downscaled.fit')
     h.writeto(f'master_dark_{exposure}_downscaled.fit', overwrite=True)
