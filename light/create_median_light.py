@@ -24,10 +24,10 @@ for band in bands:
     shape = pyfits.getdata(glob(f"*-{band}.fit*")[0]).shape
     if shape == (2048, 2048):
         master_dark = pyfits.getdata(f'../dark/master_dark_{exposure}_downscaled.fit')
-        master_flat = pyfits.getdata(f'../master_flat_{band}_downscaled.fit')
+        master_flat = pyfits.getdata(f'../flat/master_flat_{band}_downscaled.fit')
     else:
         master_dark = pyfits.getdata(f'../dark/master_dark_{exposure}.fit')
-        master_flat = pyfits.getdata(f'../master_flat_{band}.fit')
+        master_flat = pyfits.getdata(f'../flat/master_flat_{band}.fit')
 
     master_flat = master_flat / np.median(master_flat)
     master_flat = np.where(master_flat == 0, 1, master_flat)
