@@ -27,9 +27,9 @@ Let $F_R[i]$ denote the raw flat frames, $D_F$ be the master dark with the corre
 
 $F_R^\prime[i] = F_R[i] - D_F$
 
-$F_M = \text{mean}(F_R^\prime)$
+$F_M = \color{blue}{\text{fix}}(\text{mean}(F_R^\prime))$
 
-Since the bias is included in the flat dark frames, it is not removed additionally.
+Since the bias is included in the flat dark frames, it is not removed additionally. By $\color{blue}{\text{fix}}$ we remove dead pixel column by taking mean of local pixels.
 
 
 ### Flat (Long-short flats)
@@ -38,32 +38,25 @@ These are flat frames that are captured with an exposure less than 10 seconds (b
 
 Let $F_L[i]$ denote the long flat frames, $F_S[i]$ denote the short flat frames, and $F_M$ be the resulting (combined) master flat frame.
 
-$F_M = \text{mean}(F_L) - \text{mean}(F_S)$
+$F_M = \color{blue}{\text{fix}}(\text{mean}(F_L) - \text{mean}(F_S))$
 
-The flat dark is neglated due to a rather short exposure time. Since the bias is included in the short flat frames, it is not removed additionally.
+The flat dark is neglated due to a rather short exposure time. Since the bias is included in the short flat frames, it is not removed additionally. By $\color{blue}{\text{fix}}$ we remove dead pixel column by taking mean of local pixels.
 
 #### Downsampled flat
 
-Additionally, the flat frame for B, V, R is downscaled (downsampled) from 4096x4096 to 2048x2048 for use in the bin 2x2 images by local mean downscaling.
+Additionally, the master flat frame for B, V, R is downscaled (downsampled) from 4096x4096 to 2048x2048 for use in the bin 2x2 images by local mean downscaling.
 
 ### Light
 
 Let $L_R[i]$ denote the raw light frames, $F$ denote the corresponding master flat frame, $D$ denote the corresponding master dark frame, and $L_M$ be the resulting (combined) master flat frame.
 
-<!--$\begin{equation*}
-F^\prime = \left\{
-        \begin{array}{ll}
-            \cfrac{F}{\color{red}{\text{median}(F)}} & \text{, if } F > 0 \\
-            1 & \text{, if } F = 0
-        \end{array}
-    \right.
-\end{equation*}$-->
-<img src="https://user-images.githubusercontent.com/5615415/195959141-f7e86c40-ad32-4b9b-89ee-00bdb0f36c17.png" height="80">
+<!--$F^\prime = \cfrac{F}{\color{red}{\text{median}(F)}}$-->
+<img src="https://user-images.githubusercontent.com/5615415/196046767-1cbda616-ed4b-439c-b4f4-2546aab18c94.png" height="45">
 Note that the $\color{red}{\text{red}}$ part is a single number!
 
-$L_R^\prime[i] = \text{align}(L_R[i] - D)$
+<!--$L_R^\prime[i] = \cfrac{L_R[i] - D}{F^\prime}$-->
+<img src="https://user-images.githubusercontent.com/5615415/196046583-5fc90840-23d5-43e2-8ec1-02a4dd961237.png" height="45">
 
-<!--$L_M = \cfrac{\text{median}(L_R^\prime)}{F^\prime}$-->
-<img src="https://user-images.githubusercontent.com/5615415/195959500-5486ce8d-407b-494c-a8f2-6f5f75b756b4.png" height="45">
+$L_M = \text{median}(L_R^\prime)$
 
 Since the bias is included in the dark frames, it is not removed additionally. Also, each light frame is registered (aligned) using [astroalign](https://astroalign.quatrope.org/en/latest/) in prior to being combined.
