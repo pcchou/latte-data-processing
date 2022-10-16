@@ -27,7 +27,7 @@ Let $F_R[i]$ denote the raw flat frames, $D_F$ be the master dark with the corre
 
 $F_R^\prime[i] = F_R[i] - D_F$
 
-$F_M = \color{blue}{\text{fix}}(\text{mean}(F_R^\prime))$
+$F_M = \color{blue}{\text{fix}}\color{black}(\text{mean}(F_R^\prime))$
 
 Since the bias is included in the flat dark frames, it is not removed additionally. By $\color{blue}{\text{fix}}$ we remove dead pixel column by taking mean of local pixels.
 
@@ -38,7 +38,7 @@ These are flat frames that are captured with an exposure less than 10 seconds (b
 
 Let $F_L[i]$ denote the long flat frames, $F_S[i]$ denote the short flat frames, and $F_M$ be the resulting (combined) master flat frame.
 
-$F_M = \color{blue}{\text{fix}}(\text{mean}(F_L) - \text{mean}(F_S))$
+$F_M = \color{blue}{\text{fix}}\color{black}(\text{mean}(F_L) - \text{mean}(F_S))$
 
 The flat dark is neglated due to a rather short exposure time. Since the bias is included in the short flat frames, it is not removed additionally. By $\color{blue}{\text{fix}}$ we remove dead pixel column by taking mean of local pixels.
 
